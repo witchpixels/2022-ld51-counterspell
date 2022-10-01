@@ -1,0 +1,111 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://scripts/ui/ui_canvas_controller.gd" type="Script" id=1]
+[ext_resource path="res://ui/styles/theme.tres" type="Theme" id=2]
+[ext_resource path="res://scripts/ui/timer_value_label.gd" type="Script" id=3]
+[ext_resource path="res://assets/art/player_character.png" type="Texture" id=4]
+[ext_resource path="res://scripts/entities/book_controller.gd" type="Script" id=5]
+[ext_resource path="res://assets/art/book_closed.png" type="Texture" id=6]
+[ext_resource path="res://scripts/entities/player_controller.gd" type="Script" id=7]
+[ext_resource path="res://scripts/control/gale_reticule_controller.gd" type="Script" id=8]
+[ext_resource path="res://settings/default_settings.tres" type="Resource" id=9]
+[ext_resource path="res://scripts/control/flare_reticule_controller.gd" type="Script" id=10]
+[ext_resource path="res://scripts/control/camera_controller.gd" type="Script" id=11]
+[ext_resource path="res://scripts/game_stage.gd" type="Script" id=12]
+[ext_resource path="res://scripts/control/spike_reticule_controller.gd" type="Script" id=13]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[node name="GameStage" type="Node2D"]
+script = ExtResource( 12 )
+game_settings = ExtResource( 9 )
+
+[node name="Timer" type="Timer" parent="."]
+pause_mode = 1
+wait_time = 10.0
+autostart = true
+
+[node name="FlareReticule" type="Node2D" parent="."]
+script = ExtResource( 10 )
+flare_radius = 64.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+process_mode = 0
+script = ExtResource( 11 )
+camera_speed = 0.5
+wander_radius = 60.0
+
+[node name="UIRoot" type="Control" parent="Camera2D"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="Camera2D/UIRoot"]
+anchor_right = 1.0
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/UIRoot/CenterContainer"]
+margin_top = 12.0
+margin_right = 52.0
+margin_bottom = 28.0
+
+[node name="TimeValue" type="Label" parent="Camera2D/UIRoot/CenterContainer/HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 16.0
+theme = ExtResource( 2 )
+text = "10"
+align = 1
+valign = 1
+script = ExtResource( 3 )
+
+[node name="SecondsLabel" type="Label" parent="Camera2D/UIRoot/CenterContainer/HBoxContainer"]
+margin_left = 36.0
+margin_right = 52.0
+margin_bottom = 16.0
+theme = ExtResource( 2 )
+text = "s"
+align = 1
+valign = 1
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Camera2D/UIRoot"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="world" type="YSort" parent="."]
+
+[node name="Player" type="KinematicBody2D" parent="world"]
+unique_name_in_owner = true
+script = ExtResource( 7 )
+movement_speed = 75.0
+
+[node name="SpikeReticule" type="Node2D" parent="world/Player"]
+script = ExtResource( 13 )
+
+[node name="GaleReticule" type="Node2D" parent="world/Player"]
+script = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world/Player"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="world/Player"]
+position = Vector2( 1, -1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Book" type="Node2D" parent="world"]
+script = ExtResource( 5 )
+book_speed = 70.0
+book_offset = Vector2( 12, 1 )
+
+[node name="BookSprite" type="Sprite" parent="world/Book"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
