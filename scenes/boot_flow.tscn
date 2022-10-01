@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/bootflow/witchpixels-intro.webm" type="VideoStream" id=1]
+
+[node name="BootFlow" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_top = 12.0036
+margin_right = 1024.0
+margin_bottom = 587.996
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0, 0, 0, 1 )
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+ratio = 1.7778
+
+[node name="VideoPlayer" type="VideoPlayer" parent="AspectRatioContainer"]
+margin_top = 12.0036
+margin_right = 1024.0
+margin_bottom = 587.996
+stream = ExtResource( 1 )
+autoplay = true
