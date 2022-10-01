@@ -1,5 +1,12 @@
 image: barichello/godot-ci:3.5.1
 
+# Cache imported assets between runs
+cache:
+  key: import-assets
+  paths:
+    - .import/
+
+
 variables:
   EXPORT_NAME: spelltimer
 
@@ -63,4 +70,4 @@ itchio:macosx:
   script:
     - butler push ./build/mac $ITCHIO_USERNAME/$ITCHIO_GAME:mac
   dependencies:
-    - mac
+    - macosx
