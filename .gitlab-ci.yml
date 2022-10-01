@@ -68,6 +68,6 @@ itchio:windows:
 itchio:macosx:
   stage: deploy
   script:
-    - butler push ./build/mac $ITCHIO_USERNAME/$ITCHIO_GAME:mac
+    - butler push ./build/macosx $ITCHIO_USERNAME/$ITCHIO_GAME:mac
   dependencies:
     - macosx
