@@ -63,4 +63,4 @@ itchio:macosx:
   script:
     - butler push ./build/mac $ITCHIO_USERNAME/$ITCHIO_GAME:mac
   dependencies:
-    - mac
+    - macosx
