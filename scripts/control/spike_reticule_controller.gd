@@ -4,7 +4,7 @@ export var highlight_color: Color;
 export var unhighlighted_color: Color;
 export var spike_damage: float = 1
 
-onready var sprite: Sprite = $"./Sprite";
+onready var sprite: AnimatedSprite = $"./Sprite";
 
 var game_stage: GameStage
 var game_settings: GameSettings
@@ -15,8 +15,10 @@ var angle: float;
 
 func _ready():
 	set_process(false)
-	var _i = owner.connect("ready", self, "stage_ready")
+	var _i = owner.connect("game_stage_ready", self, "stage_ready")
 	sprite.visible = false
+	sprite.playing = false
+	sprite.frame = 0
 
 func _process(_delta):
 	
@@ -41,9 +43,9 @@ func _process(_delta):
 
 	rotation_degrees = angle; 
 
-func stage_ready():
+func stage_ready(stage: GameStage):
 	set_process(true)
-	game_stage = (owner as GameStage)
+	game_stage = stage
 	game_settings = game_stage.get_game_settings()
 	var _d = game_stage.get_timer().connect("timeout", self, "invoke_spell")
 	_d = game_stage.get_player_state().connect("spell_has_changed", self, "spell_changed")
@@ -53,9 +55,11 @@ func stage_ready():
 
 func on_book_obtained():
 	sprite.visible = true;
+	sprite.playing = true
 
 func invoke_spell():
 	var targets = get_overlapping_bodies();
+	sprite.frame = 0
 
 	for target in targets:
 		if target.has_method("do_damage"):
