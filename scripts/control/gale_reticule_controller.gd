@@ -1,6 +1,9 @@
-extends Node2D
+extends Area2D
 
-export var gale_radius: float = 128.0;
+export var gale_shove_distance: float = 132;
+export var gale_shove_speed: float = 100;
+export var stun_duration: float = 2;
+
 
 var game_stage: GameStage
 var game_settings: GameSettings
@@ -9,9 +12,6 @@ var active: bool = false
 func _ready():
 	set_process(false)
 	var _i = owner.connect("ready", self, "stage_ready")
-
-func _draw():
-	draw_arc(get_global_transform().origin, gale_radius, 0.0, PI * 2.0, 128, Color.green, 2.0)
 
 
 func stage_ready():
@@ -23,9 +23,13 @@ func stage_ready():
 	spell_changed(game_stage.get_player_state().current_spell)
 
 func invoke_spell():
-	if active:
-		print("gale push");
+	var targets = get_overlapping_bodies();
+
+	var player_positon = game_stage.get_player_state().world_position;
+
+	for target in targets:
+		if target.has_method("shove"):
+			target.shove(player_positon, gale_shove_distance, gale_shove_speed, stun_duration)
 
 func spell_changed(spell_name: String):
 	active = (spell_name == "gale")
-		

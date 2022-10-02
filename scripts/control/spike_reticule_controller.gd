@@ -22,6 +22,10 @@ func _process(_delta):
 		var movement_vector := Vector2(
 			Input.get_axis("player_aim_left", "player_aim_right"),
 			Input.get_axis("player_aim_up", "player_aim_down")).normalized()
+
+		if (movement_vector.length_squared() != 1):
+			return;
+		
 		angle = rad2deg(movement_vector.angle())
 	else:
 		angle = 46.25;
@@ -32,7 +36,6 @@ func _process(_delta):
 		
 
 func _draw():
-
 	var angle_start = deg2rad(angle - spike_radius)
 	var angle_end = deg2rad(angle + spike_radius)
 

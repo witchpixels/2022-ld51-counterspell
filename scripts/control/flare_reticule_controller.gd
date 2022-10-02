@@ -1,7 +1,8 @@
-extends Node2D
+extends Area2D
 
+export var flare_damage: int = 3;
 export var flare_reticule_movement_speed: float = 100.0
-export var flare_radius: float = 12.0;
+export var flare_max_distance: float = 256.0;
 
 var game_stage: GameStage
 var game_settings: GameSettings
@@ -12,19 +13,18 @@ func _ready():
 	var _i = owner.connect("ready", self, "stage_ready")
 
 func _process(delta):
+
+	if !active:
+		return
+
+	clamp_position(delta)
+
 	if (game_settings.use_controller):
 		var movement_vector := Vector2(
 			Input.get_axis("player_aim_left", "player_aim_right"),
 			Input.get_axis("player_aim_up", "player_aim_down")).normalized()
 			
 		translate(movement_vector * flare_reticule_movement_speed * delta)
-
-	else:
-		position += Input.get_last_mouse_speed();
-
-func _draw():
-	draw_arc(get_global_transform().origin, flare_radius, 0.0, PI * 2.0, 128, Color.red, 2.0);
-
 
 func stage_ready():
 	set_process(true)
@@ -35,10 +35,20 @@ func stage_ready():
 	spell_changed(game_stage.get_player_state().current_spell)
 
 func invoke_spell():
-	if active:
-		print("flare boom");
+	var targets = get_overlapping_bodies();
+
+	for target in targets:
+		if target.has_method("do_damage"):
+			target.do_damage(flare_damage)
 
 func spell_changed(spell_name: String):
 	active = spell_name == "flare"
-	position = game_stage.get_player_state().world_position;
+
+	if active:
+		clamp_position(0.001)
+
+func clamp_position(delta):
+	var player_position = game_stage.get_player_state().world_position
+	if (abs(position.distance_to(player_position)) > flare_max_distance):
+		position = lerp(position, player_position.direction_to(position) * flare_max_distance + player_position, delta * flare_reticule_movement_speed)
 		
