@@ -4,7 +4,7 @@ signal spell_has_changed(new_spell)
 signal player_killed()
 
 export var world_position: Vector2 = Vector2.ZERO;
-export var health: int = 2;
+export var health: int = 7;
 export var max_health: int = 7;
 export var current_spell: String = "gale";
 export var iframes_duration: float = 5.0
