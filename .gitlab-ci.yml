@@ -27,8 +27,6 @@ windows:
       - build/windows
 
 linux:
-  only:
-    - main
   stage: export
   script:
     - mkdir -v -p build/linux
@@ -52,6 +50,8 @@ macosx:
       - build/macosx
 
 itchio:linux:
+  only:
+    - main
   stage: deploy
   script:
     - butler push ./build/linux $ITCHIO_USERNAME/$ITCHIO_GAME:linux
@@ -59,6 +59,8 @@ itchio:linux:
     - linux
 
 itchio:windows:
+  only:
+    - main
   stage: deploy
   script:
     - butler push ./build/windows $ITCHIO_USERNAME/$ITCHIO_GAME:windows
@@ -66,6 +68,8 @@ itchio:windows:
     - windows
 
 itchio:macosx:
+  only:
+    - main
   stage: deploy
   script:
     - butler push ./build/macosx $ITCHIO_USERNAME/$ITCHIO_GAME:mac
