@@ -24,7 +24,7 @@ func _physics_process(delta):
 
 	var velocity = move_and_slide(movement_vector * movement_speed * delta)
 	translate(velocity)
-	player_state.world_position = get_global_transform().origin;
+	player_state.world_position = position;
 
 	if (Input.is_action_pressed("player_change_spell_flare")):
 		player_state.set_spell("flare")
@@ -38,3 +38,8 @@ func stage_ready():
 	game_stage = owner;
 	game_settings = game_stage.get_game_settings()
 	player_state = game_stage.get_player_state()
+	player_state.world_position = position;
+
+
+func do_damage(_damage_amount: int):
+	print("oof")

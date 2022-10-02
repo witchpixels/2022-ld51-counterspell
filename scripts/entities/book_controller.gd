@@ -11,7 +11,7 @@ onready var book_sprite = $"./BookSprite"
 var total_timer: float = 0.0;
 
 func _process(delta):
-	var direction: Vector2 = (player.get_global_transform().origin + book_offset) - get_global_transform().origin;
+	var direction: Vector2 = (player.position + book_offset) - position;
 
 	if (direction.length() > 1.0):
 		translate(direction.normalized() * book_speed * delta)
