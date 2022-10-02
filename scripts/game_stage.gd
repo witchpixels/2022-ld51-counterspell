@@ -5,6 +5,8 @@ var player_state: PlayerState;
 
 onready var timer = $"./Timer";
 
+signal game_start()
+
 func _ready():
 	player_state = PlayerState.new();
 
@@ -16,3 +18,7 @@ func get_player_state() -> PlayerState:
 
 func get_timer() -> Timer:
 	return timer;
+
+func player_obtained_book():
+	emit_signal("game_start")
+	timer.start()

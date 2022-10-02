@@ -3,4 +3,8 @@
 [ext_resource path="res://ui/styles/press_start_font.tres" type="DynamicFont" id=1]
 
 [resource]
+default_font = ExtResource( 1 )
+Label/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+Label/constants/shadow_offset_x = 2
+Label/constants/shadow_offset_y = 2
 Label/fonts/font = ExtResource( 1 )

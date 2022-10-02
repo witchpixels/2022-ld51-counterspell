@@ -36,9 +36,9 @@ func _ready():
 	set_process(false)
 	var _i = owner.connect("ready", self, "stage_ready")
 
-	awareness_visuals[Awareness.ALERT] = $"AwarenessContainter/Alert"
-	awareness_visuals[Awareness.AWARE] = $"AwarenessContainter/Aware"
-	awareness_visuals[Awareness.UNAWARE] = $"AwarenessContainter/Unaware"
+	awareness_visuals[Awareness.ALERT] = $"./AwarenessContainter/Alert"
+	awareness_visuals[Awareness.AWARE] = $"./AwarenessContainter/Aware"
+	awareness_visuals[Awareness.UNAWARE] = $"./AwarenessContainter/Unaware"
 	update_awareness_value();
 
 func stage_ready():
@@ -54,6 +54,7 @@ func stage_ready():
 
 func _physics_process(delta):
 	if state == ActivityState.DEAD:
+		get_parent().remove_child(self)
 		return
 
 
@@ -74,7 +75,8 @@ func _physics_process(delta):
 	player_search_raycast.force_raycast_update()
 	if player_search_raycast.is_colliding():
 		var collider = player_search_raycast.get_collider() as CollisionObject2D
-		can_see_player = collider.get_collision_mask_bit(2)
+		if collider:
+			can_see_player = collider.get_collision_mask_bit(2)
 	else:
 		can_see_player = false
 
@@ -98,8 +100,9 @@ func _physics_process(delta):
 
 	update_awareness_value();
 
-func do_damage(_damage_amount: int):
-	get_parent().remove_child(self)
+func do_damage(damage_amount: int, damage_source: String):
+	if enemy_brain.take_damage(damage_amount, damage_source):
+		state = ActivityState.DEAD;
 
 
 func shove(origin: Vector2, distance: float, speed: float, stun_duration: float):

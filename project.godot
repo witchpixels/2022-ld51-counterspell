@@ -40,7 +40,7 @@ _global_script_class_icons={
 
 config/name="Counterspell"
 config/description="Ancient magic awaits you in the catacombs, but it comes with a caveat."
-run/main_scene="res://scenes/game_stage.tscn"
+run/main_scene="res://scenes/main.tscn"
 config/icon="res://icon.png"
 
 [display]
