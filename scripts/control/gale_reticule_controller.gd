@@ -6,9 +6,9 @@ export var gale_shove_distance: float = 132;
 export var gale_shove_speed: float = 100;
 export var stun_duration: float = 2;
 export var gale_reticule_movement_speed: float = 100.0
-export var gale_max_distance: float = 128.0;
+export var gale_max_distance: float = 256.0;
 
-onready var sprite: Sprite = $"./Sprite";
+onready var sprite: AnimatedSprite = $"./Sprite";
 
 var game_stage: GameStage
 var game_settings: GameSettings
@@ -18,6 +18,8 @@ func _ready():
 	set_process(false)
 	var _i = owner.connect("ready", self, "stage_ready")
 	sprite.visible = false
+	sprite.playing = false
+	sprite.frame = 0
 
 func _process(delta):
 
@@ -44,16 +46,16 @@ func stage_ready():
 	var _i = game_stage.connect("game_start", self, "on_book_obtained") 
 
 func on_book_obtained():
-	sprite.visible = true;
+	sprite.visible = true
+	sprite.playing = true
 
 func invoke_spell():
 	var targets = get_overlapping_bodies();
-
-	var player_positon = game_stage.get_player_state().world_position;
+	sprite.frame = 0
 
 	for target in targets:
-		if target.has_method("shove"):
-			target.shove(player_positon, 0, 0, stun_duration)
+		if target.has_method("stun"):
+			target.stun(stun_duration)
 
 func spell_changed(spell_name: String):
 	active = (spell_name == "gale")

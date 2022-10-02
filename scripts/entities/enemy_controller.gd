@@ -25,8 +25,6 @@ onready var player_search_raycast: RayCast2D = $"./PlayerSearchRayCast"
 var awareness_visuals: Dictionary = {};
 
 var stun_timer: float;
-var shove_speed: float;
-var shove_target_position: Vector2;
 
 var enemy_brain: EnemyBrainBase
 var game_stage: GameStage
@@ -39,7 +37,6 @@ func _ready():
 	awareness_visuals[Awareness.ALERT] = $"./AwarenessContainter/Alert"
 	awareness_visuals[Awareness.AWARE] = $"./AwarenessContainter/Aware"
 	awareness_visuals[Awareness.UNAWARE] = $"./AwarenessContainter/Unaware"
-	update_awareness_value();
 
 func stage_ready():
 	set_process(true)
@@ -60,11 +57,6 @@ func _physics_process(delta):
 
 	if state == ActivityState.STUNNED:
 		stun_timer -= delta
-		shove_speed -= delta * shove_speed / 2
-
-		if (shove_target_position.distance_to(position) > 1):
-			var vec = position.direction_to(shove_target_position);
-			translate(move_and_slide(vec * shove_speed * delta))
 
 		if stun_timer <= 0:
 			state = ActivityState.ACTIVE
@@ -105,16 +97,12 @@ func do_damage(damage_amount: int, damage_source: String):
 		state = ActivityState.DEAD;
 
 
-func shove(origin: Vector2, distance: float, speed: float, stun_duration: float):
+func stun(stun_duration: float):
 
-	print("%s was shoved" % name)
-
-	var direction_from_point = origin.direction_to(position)
-	shove_target_position = direction_from_point.normalized() * distance;
-	awareness = Awareness.UNAWARE
-	state = ActivityState.STUNNED
-	shove_speed = speed
+	print("%s was stunned" % name)
 	stun_timer = stun_duration
+	state = ActivityState.STUNNED
+	awareness = Awareness.UNAWARE
 	update_awareness_value()
 
 func process_unaware_state():

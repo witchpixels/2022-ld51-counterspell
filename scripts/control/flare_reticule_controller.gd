@@ -6,7 +6,7 @@ export var flare_damage: int = 3;
 export var flare_reticule_movement_speed: float = 100.0
 export var flare_max_distance: float = 256.0;
 
-onready var sprite: Sprite = $"./Sprite";
+onready var sprite: AnimatedSprite = $"./Sprite";
 
 var game_stage: GameStage
 var game_settings: GameSettings
@@ -16,6 +16,8 @@ func _ready():
 	set_process(false)
 	var _i = owner.connect("ready", self, "stage_ready")
 	sprite.visible = false
+	sprite.playing = false
+	sprite.frame = 0
 
 func _process(delta):
 
@@ -42,10 +44,12 @@ func stage_ready():
 	var _i = game_stage.connect("game_start", self, "on_book_obtained") 
 
 func on_book_obtained():
-	sprite.visible = true;
+	sprite.visible = true
+	sprite.playing = true
 
 func invoke_spell():
 	var targets = get_overlapping_bodies();
+	sprite.frame = 0
 
 	for target in targets:
 		if target.has_method("do_damage"):

@@ -4,6 +4,7 @@
 [ext_resource path="res://entities/enemies/generic_corpse.tscn" type="PackedScene" id=2]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource( 1 )
 corpse = ExtResource( 2 )
 attack_damage = 1

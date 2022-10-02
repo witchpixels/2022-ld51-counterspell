@@ -13,12 +13,20 @@ func _load_new_game():
 	
 	current_game = game_stage_scene.instance() as GameStage
 	current_game.connect("ready", self, "_new_game_ready")
+	current_game.connect("exit_reached", self, "_on_exit_reached")
 	add_child(current_game)
 
 func _new_game_ready():
-	current_game.get_player_state().connect("player_killed", self, "_on_BootFlow_finished")
+	current_game.get_player_state().connect("player_killed", self, "_on_player_killed")
 
-
+func _on_player_killed():
+	remove_child(current_game)
+	var timer = get_tree().create_timer(5)
+	timer.connect("timeout", self, "_on_BootFlow_finished");
 
 func _on_BootFlow_finished():
 	_load_new_game()
+
+func _on_exit_reached():
+	remove_child(current_game)
+	remove_child(game_over)

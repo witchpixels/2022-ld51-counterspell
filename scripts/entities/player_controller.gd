@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal game_stage_ready(game_stage)
+
 export var movement_speed: float = 30;
 
 onready var sprite: Sprite = $"./Sprite"
@@ -46,6 +48,7 @@ func stage_ready():
 	player_state = game_stage.get_player_state()
 	player_state.world_position = position
 	player_state.player_body = self
+	emit_signal("game_stage_ready", game_stage)
 
 
 func do_damage(damage_amount: int, _damage_source: String):
