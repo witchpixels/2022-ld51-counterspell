@@ -1,7 +1,10 @@
-extends Node2D
+extends Area2D
 
-export var spike_range: float = 256.0
-export var spike_radius: float = 15.0;
+export var highlight_color: Color;
+export var unhighlighted_color: Color;
+export var spike_damage: float = 1
+
+onready var sprite: Sprite = $"./Sprite";
 
 var game_stage: GameStage
 var game_settings: GameSettings
@@ -13,9 +16,13 @@ var angle: float;
 func _ready():
 	set_process(false)
 	var _i = owner.connect("ready", self, "stage_ready")
+	sprite.visible = false
 
 func _process(_delta):
 	
+	if !active:
+		return
+
 	angle = 0.0
 
 	if (game_settings.use_controller):
@@ -33,14 +40,6 @@ func _process(_delta):
 	angle = int(angle / 45.0) * 45.0
 
 	rotation_degrees = angle; 
-		
-
-func _draw():
-	var angle_start = deg2rad(angle - spike_radius)
-	var angle_end = deg2rad(angle + spike_radius)
-
-	draw_arc(position, spike_range, angle_start, angle_end, 128, Color.cyan, 2.0)
-
 
 func stage_ready():
 	set_process(true)
@@ -50,10 +49,23 @@ func stage_ready():
 	_d = game_stage.get_player_state().connect("spell_has_changed", self, "spell_changed")
 	spell_changed(game_stage.get_player_state().current_spell)
 
+	var _i = game_stage.connect("game_start", self, "on_book_obtained") 
+
+func on_book_obtained():
+	sprite.visible = true;
+
 func invoke_spell():
-	if active:
-		print("spike stab");
+	var targets = get_overlapping_bodies();
+
+	for target in targets:
+		if target.has_method("do_damage"):
+			target.do_damage(spike_damage, "spike")
 
 func spell_changed(spell_name: String):
 	active = spell_name == "spike"
+
+	if active:
+		sprite.modulate = highlight_color
+	else:
+		sprite.modulate = unhighlighted_color
 		

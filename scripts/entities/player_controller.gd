@@ -32,14 +32,21 @@ func _physics_process(delta):
 		player_state.set_spell("gale")
 	elif (Input.is_action_pressed("player_change_spell_spike")):
 		player_state.set_spell("spike")
+
+func _process(_delta):
+	if player_state.in_iframes:
+		sprite.modulate.a = abs(sin(game_stage.timer.time_left * 50))
+	else:
+		sprite.modulate.a = 1.0
 	
 func stage_ready():
 	set_process(true)
 	game_stage = owner;
 	game_settings = game_stage.get_game_settings()
 	player_state = game_stage.get_player_state()
-	player_state.world_position = position;
+	player_state.world_position = position
+	player_state.player_body = self
 
 
-func do_damage(_damage_amount: int):
-	print("oof")
+func do_damage(damage_amount: int, _damage_source: String):
+	player_state.damage_player(damage_amount)

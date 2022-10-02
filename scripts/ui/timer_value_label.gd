@@ -1,9 +1,6 @@
 extends Label
 
-var timer: Timer;
-
-func _ready():
-	timer = get_node("/root/GameStage/Timer")
+onready var timer: Timer = $"%Timer";
 
 func _process(_delta):
 	var time_left = timer.time_left;

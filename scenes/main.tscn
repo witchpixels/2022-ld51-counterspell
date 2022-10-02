@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/main.gd" type="Script" id=1]
+[ext_resource path="res://ui/styles/theme.tres" type="Theme" id=2]
+[ext_resource path="res://scenes/boot_flow.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/game_stage.tscn" type="PackedScene" id=4]
+
+[node name="Root" type="Node2D"]
+script = ExtResource( 1 )
+game_stage_scene = ExtResource( 4 )
+
+[node name="GameOver" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="GameOver"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="GameOver/CenterContainer"]
+margin_left = 440.0
+margin_top = 292.0
+margin_right = 584.0
+margin_bottom = 308.0
+theme = ExtResource( 2 )
+text = "Game Over"
+
+[node name="BootFlow" parent="." instance=ExtResource( 3 )]
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[connection signal="finished" from="BootFlow" to="." method="_on_BootFlow_finished"]
