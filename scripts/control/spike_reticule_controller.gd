@@ -36,9 +36,6 @@ func _process(_delta):
 		angle = rad2deg(movement_vector.angle())
 	else:
 		angle = rad2deg(global_position.direction_to(get_global_mouse_position()).angle())
-
-	angle = int(angle / 45.0) * 45.0
-
 	rotation_degrees = angle; 
 
 func stage_ready(stage: GameStage):
