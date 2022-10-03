@@ -34,6 +34,9 @@ func _process(delta):
 			Input.get_axis("player_aim_up", "player_aim_down")).normalized()
 			
 		translate(movement_vector * flare_reticule_movement_speed * delta)
+	else:
+		position = get_global_mouse_position();
+		clamp_position(delta);
 
 func stage_ready():
 	set_process(true)
