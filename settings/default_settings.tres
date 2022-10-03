@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource( 1 )
-use_controller = true
+use_controller = false
