@@ -5,13 +5,12 @@ export var unhighlighted_color: Color;
 export var spike_damage: float = 1
 
 onready var sprite: AnimatedSprite = $"./Sprite";
+onready var particles: Particles2D = $"./Particles"
+onready var sfx: AudioStreamPlayer2D = $"./Sfx"
 
 var game_stage: GameStage
 var game_settings: GameSettings
 var active: bool = false
-
-# wpx2022 TODO: Replace with better rendering
-var angle: float;
 
 func _ready():
 	set_process(false)
@@ -25,7 +24,7 @@ func _process(_delta):
 	if !active:
 		return
 
-	angle = 0.0
+	var angle = 0.0
 
 	if (game_settings.use_controller):
 		var movement_vector := Vector2(
@@ -54,12 +53,18 @@ func stage_ready(stage: GameStage):
 	var _i = game_stage.connect("game_start", self, "on_book_obtained") 
 
 func on_book_obtained():
-	sprite.visible = true;
 	sprite.playing = true
 
 func invoke_spell():
-	var targets = get_overlapping_bodies();
 	sprite.frame = 0
+
+	if !active:
+		return
+
+	var targets = get_overlapping_bodies();
+	
+	sfx.play()
+	particles.restart()
 
 	for target in targets:
 		if target.has_method("do_damage"):
@@ -70,6 +75,8 @@ func spell_changed(spell_name: String):
 
 	if active:
 		sprite.modulate = highlight_color
+		sprite.visible = true
 	else:
+		sprite.visible = false
 		sprite.modulate = unhighlighted_color
 		

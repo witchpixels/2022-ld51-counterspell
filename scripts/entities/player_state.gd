@@ -2,11 +2,12 @@ class_name PlayerState extends Resource;
 
 signal spell_has_changed(new_spell)
 signal player_killed()
+signal player_hurt()
 
 export var world_position: Vector2 = Vector2.ZERO;
 export var health: int = 7;
 export var max_health: int = 7;
-export var current_spell: String = "gale";
+export var current_spell: String = "spike";
 export var iframes_duration: float = 5.0
 
 export var in_iframes: bool = false;
@@ -25,6 +26,7 @@ func damage_player(damage: int):
 	if health <= 0:
 		emit_signal("player_killed")
 		return
+	emit_signal("player_hurt")
 
 	in_iframes = true;
 
@@ -33,10 +35,9 @@ func damage_player(damage: int):
 
 
 func set_spell(spell_name: String):
-	if (spell_name != current_spell):
-		print("changed spell to %s" % spell_name)
-		current_spell = spell_name
-		emit_signal("spell_has_changed", spell_name)
+	print("changed spell to %s" % spell_name)
+	current_spell = spell_name
+	emit_signal("spell_has_changed", spell_name)
 
 
 func _iframes_over():

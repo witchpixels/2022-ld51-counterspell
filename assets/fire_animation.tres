@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=2]
+
+[ext_resource path="res://assets/art/fire_anim.png" type="Texture" id=1]
+
+[sub_resource type="AtlasTexture" id=128]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=129]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=130]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=131]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=132]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=133]
+atlas = ExtResource( 1 )
+region = Rect2( 160, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=134]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 32, 32 )
+
+[resource]
+animations = [ {
+"frames": [ SubResource( 128 ), SubResource( 129 ), SubResource( 130 ), SubResource( 131 ), SubResource( 132 ), SubResource( 133 ), SubResource( 134 ), null ],
+"loop": false,
+"name": "default",
+"speed": 12.0
+} ]

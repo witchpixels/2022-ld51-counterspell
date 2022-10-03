@@ -1,19 +1,40 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://ui/styles/theme.tres" type="Theme" id=1]
-[ext_resource path="res://assets/art/player_character.png" type="Texture" id=2]
-[ext_resource path="res://entities/enemies/brains/zombie_enemy_brain.tres" type="Resource" id=3]
+[ext_resource path="res://assets/art/skeleton_warrior.png" type="Texture" id=2]
+[ext_resource path="res://scripts/entities/enemy_behaviours/enemy_brain_base.gd" type="Script" id=3]
 [ext_resource path="res://scripts/entities/enemy_controller.gd" type="Script" id=4]
+[ext_resource path="res://entities/enemies/generic_corpse.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/art/skeleton_warrior_swipe_anim.png" type="Texture" id=6]
+[ext_resource path="res://assets/audio/slash.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 16 )
 
-[node name="Zombie" type="KinematicBody2D"]
-position = Vector2( 1074, -1136 )
-collision_layer = 3
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 6 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 6 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 7 ), SubResource( 8 ), null ],
+"loop": false,
+"name": "default",
+"speed": 12.0
+} ]
+
+[node name="Skeleton" type="KinematicBody2D"]
+collision_layer = 2
 collision_mask = 2
 script = ExtResource( 4 )
-brain_resource = ExtResource( 3 )
 enemy_speed = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -23,17 +44,13 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0.537255, 0.152941, 0.243137, 1 )
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="AwarenessContainter" type="Node2D" parent="."]
-position = Vector2( 0, -16 )
-__meta__ = {
-"_edit_lock_": true
-}
+position = Vector2( 0, -24 )
 
 [node name="Alert" type="Label" parent="AwarenessContainter"]
 visible = false
@@ -64,6 +81,7 @@ text = "!"
 align = 1
 
 [node name="Unaware" type="Label" parent="AwarenessContainter"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -81,3 +99,15 @@ collision_mask = 5
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Brain" type="Node" parent="."]
+script = ExtResource( 3 )
+corpse = ExtResource( 5 )
+
+[node name="AttackAnimation" type="AnimatedSprite" parent="Brain"]
+frames = SubResource( 3 )
+frame = 3
+playing = true
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="Brain"]
+stream = ExtResource( 7 )

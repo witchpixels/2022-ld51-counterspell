@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/book_altar.png-3647122fcfe0076db4b2259816632938.stex"
+path="res://.import/skeleton_warrior_swipe_anim.png-d64a49a6387a3a7f9c591cb75e7b1419.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/book_altar.png"
-dest_files=[ "res://.import/book_altar.png-3647122fcfe0076db4b2259816632938.stex" ]
+source_file="res://assets/art/skeleton_warrior_swipe_anim.png"
+dest_files=[ "res://.import/skeleton_warrior_swipe_anim.png-d64a49a6387a3a7f9c591cb75e7b1419.stex" ]
 
 [params]
 

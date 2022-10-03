@@ -13,6 +13,7 @@ Control the Sorceress through a series of rooms casting spells to defeat monters
   * Godot 3.5.1
   * VsCodium with the GDScript Debugger
   * Pixelorama
+  * [SFXr](https://sfxr.me/)
 
 # Thank Yous
   * Barichello for his [godot-ci example](https://github.com/abarichello/godot-ci)

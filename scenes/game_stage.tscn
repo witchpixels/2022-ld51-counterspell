@@ -1,9 +1,9 @@
-[gd_scene load_steps=112 format=2]
+[gd_scene load_steps=96 format=2]
 
 [ext_resource path="res://scripts/ui/ui_canvas_controller.gd" type="Script" id=1]
 [ext_resource path="res://ui/styles/theme.tres" type="Theme" id=2]
 [ext_resource path="res://scripts/ui/timer_value_label.gd" type="Script" id=3]
-[ext_resource path="res://entities/enemies/Zombie.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/enemies/SkeletonWarrior.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/entities/book_controller.gd" type="Script" id=5]
 [ext_resource path="res://assets/art/book_closed.png" type="Texture" id=6]
 [ext_resource path="res://entities/Player.tscn" type="PackedScene" id=7]
@@ -12,15 +12,20 @@
 [ext_resource path="res://scripts/control/flare_reticule_controller.gd" type="Script" id=10]
 [ext_resource path="res://scripts/control/camera_controller.gd" type="Script" id=11]
 [ext_resource path="res://scripts/game_stage.gd" type="Script" id=12]
-[ext_resource path="res://scripts/entities/enemy_behaviours/enemy_brain_base.gd" type="Script" id=13]
-[ext_resource path="res://entities/enemies/generic_corpse.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/audio/book_collect.wav" type="AudioStream" id=13]
+[ext_resource path="res://entities/enemies/SkeletonArcher.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scripts/entities/book_activator.gd" type="Script" id=15]
 [ext_resource path="res://assets/art/flare_sigil.png" type="Texture" id=16]
 [ext_resource path="res://assets/art/gale_sigil.png" type="Texture" id=17]
 [ext_resource path="res://scripts/ui/health_bar_controller.gd" type="Script" id=18]
+[ext_resource path="res://assets/art/sleep_particle.png" type="Texture" id=19]
 [ext_resource path="res://assets/tile_sets/level_tile_set.tres" type="TileSet" id=20]
 [ext_resource path="res://assets/art/book_altar.png" type="Texture" id=21]
+[ext_resource path="res://assets/audio/sleep.wav" type="AudioStream" id=22]
 [ext_resource path="res://scripts/level_end_script.gd" type="Script" id=23]
+[ext_resource path="res://assets/fire_animation.tres" type="SpriteFrames" id=24]
+[ext_resource path="res://assets/audio/fire.wav" type="AudioStream" id=25]
+[ext_resource path="res://scripts/entities/flare_fire_ring_controller.gd" type="Script" id=26]
 
 [sub_resource type="CircleShape2D" id=5]
 radius = 128.0
@@ -152,6 +157,27 @@ animations = [ {
 "name": "default",
 "speed": 3.0
 } ]
+
+[sub_resource type="Gradient" id=126]
+offsets = PoolRealArray( 0, 0.206452, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=127]
+gradient = SubResource( 126 )
+
+[sub_resource type="ParticlesMaterial" id=125]
+lifetime_randomness = 0.2
+emission_shape = 1
+emission_sphere_radius = 100.0
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 9.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 7.92
+damping_random = 0.07
+color_ramp = SubResource( 127 )
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 64.0
@@ -287,150 +313,6 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 30, 13.5 )
 
-[sub_resource type="Resource" id=101]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=102]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=103]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=104]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=105]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=106]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=107]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=108]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=109]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=110]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=111]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=112]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=113]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=114]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=115]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=116]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=117]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=118]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=119]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=120]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=121]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=122]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=123]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
-[sub_resource type="Resource" id=124]
-resource_local_to_scene = true
-script = ExtResource( 13 )
-corpse = ExtResource( 14 )
-attack_damage = 1
-
 [sub_resource type="RectangleShape2D" id=100]
 extents = Vector2( 24, 37 )
 
@@ -473,8 +355,20 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Particles" type="Particles2D" parent="GaleReticule"]
+emitting = false
+amount = 24
+lifetime = 1.1
+one_shot = true
+local_coords = false
+process_material = SubResource( 125 )
+texture = ExtResource( 19 )
+
+[node name="Sfx" type="AudioStreamPlayer2D" parent="GaleReticule"]
+stream = ExtResource( 22 )
+
 [node name="FlareReticule" type="Area2D" parent="."]
-position = Vector2( 666, 200 )
+position = Vector2( 704, 192 )
 collision_layer = 6
 collision_mask = 0
 script = ExtResource( 10 )
@@ -493,6 +387,100 @@ frame = 29
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Sfx" type="AudioStreamPlayer2D" parent="FlareReticule"]
+stream = ExtResource( 25 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="FlameRing" type="Node2D" parent="FlareReticule"]
+position = Vector2( -2, 0 )
+script = ExtResource( 26 )
+__meta__ = {
+"_edit_lock_": true
+}
+child_animation_delay_seconds = 0.01
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="FlareReticule/FlameRing"]
+position = Vector2( 2, -64 )
+frames = ExtResource( 24 )
+frame = 6
+
+[node name="AnimatedSprite9" type="AnimatedSprite" parent="FlareReticule/FlameRing"]
+position = Vector2( 26, -56 )
+frames = ExtResource( 24 )
+frame = 6
+
+[node name="AnimatedSprite5" type="AnimatedSprite" parent="FlareReticule/FlameRing"]
+position = Vector2( 42, -48 )
+frames = ExtResource( 24 )
+frame = 6
+
+[node name="AnimatedSprite10" type="AnimatedSprite" parent="FlareReticule/FlameRing"]
+position = Vector2( 58, -24 )
+frames = ExtResource( 24 )
+frame = 6
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="FlareReticule/FlameRing"]
+position = Vector2( 66, 0 )
+frames = ExtResource( 24 )
+frame = 6
+
+[node name="AnimatedSprite11" type="AnimatedSprite" parent="FlareReticule/FlameRing"]
+position = Vector2( 58, 24 )
+frames = ExtResource( 24 )
+frame = 6
+
+[node name="AnimatedSprite6" type="AnimatedSprite" parent="FlareReticule/FlameRing"]
+position = Vector2( 49, 43 )
+frames = ExtResource( 24 )
+frame = 6
+
+[node name="AnimatedSprite12" type="AnimatedSprite" parent="FlareReticule/FlameRing"]
+position = Vector2( 26, 58 )
+frames = ExtResource( 24 )
+frame = 6
+
+[node name="AnimatedSprite3" type="AnimatedSprite" parent="FlareReticule/FlameRing"]
+position = Vector2( 2, 63 )
+frames = ExtResource( 24 )
+frame = 6
+
+[node name="AnimatedSprite13" type="AnimatedSprite" parent="FlareReticule/FlameRing"]
+position = Vector2( -22, 59 )
+frames = ExtResource( 24 )
+frame = 6
+
+[node name="AnimatedSprite7" type="AnimatedSprite" parent="FlareReticule/FlameRing"]
+position = Vector2( -46, 42 )
+frames = ExtResource( 24 )
+frame = 6
+
+[node name="AnimatedSprite14" type="AnimatedSprite" parent="FlareReticule/FlameRing"]
+position = Vector2( -54, 24 )
+frames = ExtResource( 24 )
+frame = 6
+
+[node name="AnimatedSprite4" type="AnimatedSprite" parent="FlareReticule/FlameRing"]
+position = Vector2( -62, 0 )
+frames = ExtResource( 24 )
+frame = 6
+
+[node name="AnimatedSprite15" type="AnimatedSprite" parent="FlareReticule/FlameRing"]
+position = Vector2( -54, -24 )
+frames = ExtResource( 24 )
+frame = 6
+
+[node name="AnimatedSprite8" type="AnimatedSprite" parent="FlareReticule/FlameRing"]
+position = Vector2( -46, -48 )
+frames = ExtResource( 24 )
+frame = 6
+
+[node name="AnimatedSprite16" type="AnimatedSprite" parent="FlareReticule/FlameRing"]
+position = Vector2( -22, -64 )
+frames = ExtResource( 24 )
+frame = 6
 
 [node name="BookAltar" type="StaticBody2D" parent="."]
 position = Vector2( 512, 232 )
@@ -520,102 +508,90 @@ book_offset = Vector2( 12, 1 )
 [node name="BookSprite" type="Sprite" parent="world/Book"]
 texture = ExtResource( 6 )
 
-[node name="Zombie" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 672, -1280 )
 collision_mask = 3
-brain_resource = SubResource( 101 )
 
-[node name="Zombie2" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior2" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 288, -1280 )
-brain_resource = SubResource( 102 )
 
-[node name="Zombie3" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior3" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 288, -1152 )
-brain_resource = SubResource( 103 )
 
-[node name="Zombie4" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior4" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 672, -1152 )
-brain_resource = SubResource( 104 )
 
-[node name="Zombie5" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior5" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 288, -1024 )
-brain_resource = SubResource( 105 )
 
-[node name="Zombie6" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior6" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 672, -1024 )
-brain_resource = SubResource( 106 )
 
-[node name="Zombie7" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior7" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 288, -896 )
-brain_resource = SubResource( 107 )
 
-[node name="Zombie8" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior8" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 680, -896 )
-brain_resource = SubResource( 108 )
 
-[node name="Zombie9" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior9" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 488, -792 )
-brain_resource = SubResource( 109 )
 
-[node name="Zombie10" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior10" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 128, -1792 )
-brain_resource = SubResource( 110 )
 
-[node name="Zombie11" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior11" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 128, -1664 )
-brain_resource = SubResource( 111 )
 
-[node name="Zombie12" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior12" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 200, -1728 )
-brain_resource = SubResource( 112 )
 
-[node name="Zombie13" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior13" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 768, -1792 )
-brain_resource = SubResource( 113 )
 
-[node name="Zombie14" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior14" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 896, -1792 )
-brain_resource = SubResource( 114 )
 
-[node name="Zombie15" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior15" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 768, -1664 )
-brain_resource = SubResource( 115 )
 
-[node name="Zombie16" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior16" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 896, -1664 )
-brain_resource = SubResource( 116 )
 
-[node name="Zombie17" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior17" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 488, -1760 )
-brain_resource = SubResource( 117 )
 
-[node name="Zombie18" parent="world" instance=ExtResource( 4 )]
-position = Vector2( 488, -2048 )
-brain_resource = SubResource( 118 )
+[node name="SkeletonWarrior18" parent="world" instance=ExtResource( 4 )]
+position = Vector2( 488, -1984 )
 
-[node name="Zombie19" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior19" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1192, -2104 )
-brain_resource = SubResource( 119 )
 
-[node name="Zombie20" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior20" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1240, -2104 )
-brain_resource = SubResource( 120 )
 
-[node name="Zombie21" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior21" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1280, -2104 )
-brain_resource = SubResource( 121 )
 
-[node name="Zombie22" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior22" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1192, -2008 )
-brain_resource = SubResource( 122 )
 
-[node name="Zombie23" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior23" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1240, -2008 )
-brain_resource = SubResource( 123 )
 
-[node name="Zombie24" parent="world" instance=ExtResource( 4 )]
+[node name="SkeletonWarrior24" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1288, -2008 )
-brain_resource = SubResource( 124 )
+
+[node name="SkeletonArcher" parent="world" instance=ExtResource( 14 )]
+position = Vector2( 848, -1744 )
+
+[node name="SkeletonArcher2" parent="world" instance=ExtResource( 14 )]
+position = Vector2( 128, -1744 )
+
+[node name="SkeletonArcher4" parent="world" instance=ExtResource( 14 )]
+position = Vector2( 488, -2056 )
+
+[node name="SkeletonArcher3" parent="world" instance=ExtResource( 14 )]
+position = Vector2( 1376, -2056 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
@@ -704,25 +680,11 @@ margin_right = 990.0
 margin_bottom = 216.0
 
 [node name="Gale" type="VBoxContainer" parent="BookActivationArea/Buttons"]
-margin_right = 336.0
-margin_bottom = 112.0
+margin_right = 324.0
+margin_bottom = 93.0
 
-[node name="ControlsAndName" type="HBoxContainer" parent="BookActivationArea/Buttons/Gale"]
-margin_right = 336.0
-margin_bottom = 16.0
-
-[node name="Buttons" type="Label" parent="BookActivationArea/Buttons/Gale/ControlsAndName"]
-margin_right = 160.0
-margin_bottom = 16.0
-theme = ExtResource( 2 )
-text = "1/Triangle"
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Name" type="Label" parent="BookActivationArea/Buttons/Gale/ControlsAndName"]
-margin_left = 164.0
-margin_right = 276.0
+[node name="Name" type="Label" parent="BookActivationArea/Buttons/Gale"]
+margin_right = 324.0
 margin_bottom = 16.0
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0.121569, 0.819608, 0, 1 )
@@ -733,35 +695,20 @@ __meta__ = {
 
 [node name="Help" type="Label" parent="BookActivationArea/Buttons/Gale"]
 margin_top = 20.0
-margin_right = 336.0
-margin_bottom = 112.0
+margin_right = 324.0
+margin_bottom = 93.0
 theme = ExtResource( 2 )
 text = "Puts enemies to 
 sleep for a short
-time. can be left
-behind.
+time.
 "
 
 [node name="FlareTutorial" type="VBoxContainer" parent="BookActivationArea/Buttons"]
-margin_top = 116.0
-margin_right = 336.0
-margin_bottom = 228.0
+margin_top = 97.0
+margin_right = 324.0
+margin_bottom = 209.0
 
-[node name="ControlsAndName" type="HBoxContainer" parent="BookActivationArea/Buttons/FlareTutorial"]
-margin_right = 336.0
-margin_bottom = 16.0
-
-[node name="Buttons" type="Label" parent="BookActivationArea/Buttons/FlareTutorial/ControlsAndName"]
-margin_right = 128.0
-margin_bottom = 16.0
-theme = ExtResource( 2 )
-text = "2/Circle"
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Name" type="Label" parent="BookActivationArea/Buttons/FlareTutorial/ControlsAndName"]
-margin_left = 132.0
+[node name="Name" type="Label" parent="BookActivationArea/Buttons/FlareTutorial"]
 margin_right = 324.0
 margin_bottom = 16.0
 theme = ExtResource( 2 )
@@ -773,36 +720,22 @@ __meta__ = {
 
 [node name="Help" type="Label" parent="BookActivationArea/Buttons/FlareTutorial"]
 margin_top = 20.0
-margin_right = 336.0
+margin_right = 324.0
 margin_bottom = 112.0
 theme = ExtResource( 2 )
-text = "Burns Enemies for
-high damage. but
-it can hurt you. Can
-be left behind.
+text = "Deals high damage 
+in a small circle. 
+But be weary it 
+can hurt you.
 "
 
 [node name="SpikeTutorial" type="VBoxContainer" parent="BookActivationArea/Buttons"]
-margin_top = 232.0
-margin_right = 336.0
-margin_bottom = 363.0
+margin_top = 213.0
+margin_right = 324.0
+margin_bottom = 344.0
 
-[node name="ControlsAndName" type="HBoxContainer" parent="BookActivationArea/Buttons/SpikeTutorial"]
-margin_right = 336.0
-margin_bottom = 16.0
-
-[node name="Buttons" type="Label" parent="BookActivationArea/Buttons/SpikeTutorial/ControlsAndName"]
-margin_right = 128.0
-margin_bottom = 16.0
-theme = ExtResource( 2 )
-text = "3/Square"
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Name" type="Label" parent="BookActivationArea/Buttons/SpikeTutorial/ControlsAndName"]
-margin_left = 132.0
-margin_right = 292.0
+[node name="Name" type="Label" parent="BookActivationArea/Buttons/SpikeTutorial"]
+margin_right = 324.0
 margin_bottom = 16.0
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0.819608, 0.792157, 1 )
@@ -813,7 +746,7 @@ __meta__ = {
 
 [node name="Help" type="Label" parent="BookActivationArea/Buttons/SpikeTutorial"]
 margin_top = 20.0
-margin_right = 336.0
+margin_right = 324.0
 margin_bottom = 131.0
 theme = ExtResource( 2 )
 text = "Simple damage spell.
@@ -824,15 +757,16 @@ area.
 "
 
 [node name="Label" type="Label" parent="BookActivationArea/Buttons"]
-margin_top = 367.0
-margin_right = 336.0
+margin_top = 348.0
+margin_right = 324.0
 margin_bottom = 459.0
 theme = ExtResource( 2 )
-text = "Spells automatically 
-cast every 10 
-seconds. What other
-effects might this
-timer have?"
+text = "The current spell
+you have will cast
+every 10 seconds.
+
+Then you will be
+given a new spell."
 
 [node name="General Tutorial" type="VBoxContainer" parent="BookActivationArea"]
 margin_left = 66.0
@@ -873,3 +807,7 @@ script = ExtResource( 23 )
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="LevelEndArea"]
 position = Vector2( 1472, -2053 )
 shape = SubResource( 100 )
+
+[node name="BookCollectSfx" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 512, 204 )
+stream = ExtResource( 13 )
