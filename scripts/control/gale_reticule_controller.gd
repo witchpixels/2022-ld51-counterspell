@@ -9,6 +9,8 @@ export var gale_reticule_movement_speed: float = 100.0
 export var gale_max_distance: float = 256.0;
 
 onready var sprite: AnimatedSprite = $"./Sprite";
+onready var particles: Particles2D = $"./Particles"
+onready var sfx: AudioStreamPlayer2D = $"./Sfx"
 
 var game_stage: GameStage
 var game_settings: GameSettings
@@ -23,10 +25,10 @@ func _ready():
 
 func _process(delta):
 
+	clamp_position(delta)
+
 	if !active:
 		return
-
-	clamp_position(delta)
 
 	if (game_settings.use_controller):
 		var movement_vector := Vector2(
@@ -46,12 +48,17 @@ func stage_ready():
 	var _i = game_stage.connect("game_start", self, "on_book_obtained") 
 
 func on_book_obtained():
-	sprite.visible = true
 	sprite.playing = true
 
 func invoke_spell():
-	var targets = get_overlapping_bodies();
 	sprite.frame = 0
+
+	if !active:
+		return
+
+	sfx.play()
+	particles.restart()
+	var targets = get_overlapping_bodies();
 
 	for target in targets:
 		if target.has_method("stun"):
@@ -61,9 +68,11 @@ func spell_changed(spell_name: String):
 	active = (spell_name == "gale")
 	
 	if active:
-		clamp_position(0.001)
+		position = game_stage.get_player_state().world_position
 		sprite.modulate = highlight_color
+		sprite.visible = true
 	else:
+		sprite.visible = false
 		sprite.modulate = unhighlighted_color
 
 func clamp_position(delta):

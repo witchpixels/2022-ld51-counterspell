@@ -3,12 +3,21 @@ extends KinematicBody2D
 signal game_stage_ready(game_stage)
 
 export var movement_speed: float = 30;
-
+onready var timer 
 onready var sprite: Sprite = $"./Sprite"
+onready var hurt_sound: AudioStreamPlayer2D = $"./HurtSound"
+onready var death_sound: AudioStreamPlayer2D = $"./DeathSound"
 
 var game_stage: GameStage
 var game_settings: GameSettings
 var player_state: PlayerState
+
+var current_spell_index = 0;
+var spells: Array = [
+	"spike",
+	"gale",
+	"flare"
+]
 
 func _ready():
 	set_process(false)
@@ -28,13 +37,6 @@ func _physics_process(delta):
 	translate(velocity)
 	player_state.world_position = position;
 
-	if (Input.is_action_pressed("player_change_spell_flare")):
-		player_state.set_spell("flare")
-	elif (Input.is_action_pressed("player_change_spell_gale")):
-		player_state.set_spell("gale")
-	elif (Input.is_action_pressed("player_change_spell_spike")):
-		player_state.set_spell("spike")
-
 func _process(_delta):
 	if player_state.in_iframes:
 		sprite.modulate.a = abs(sin(game_stage.timer.time_left * 50))
@@ -48,8 +50,22 @@ func stage_ready():
 	player_state = game_stage.get_player_state()
 	player_state.world_position = position
 	player_state.player_body = self
-	emit_signal("game_stage_ready", game_stage)
 
+	var _i = player_state.connect("player_hurt", self, "_on_hurt");
+	_i = player_state.connect("player_killed", self, "_on_killed");
+	_i = game_stage.get_timer().connect("timeout", self, "_on_timer_timeout")
+
+	emit_signal("game_stage_ready", game_stage)
 
 func do_damage(damage_amount: int, _damage_source: String):
 	player_state.damage_player(damage_amount)
+
+func _on_hurt():
+	hurt_sound.play()
+
+func _on_killed():
+	death_sound.play()
+
+func _on_timer_timeout():
+	current_spell_index = (current_spell_index + 1) % spells.size()
+	player_state.call_deferred("set_spell", spells[current_spell_index])

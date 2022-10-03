@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/book_altar.png-3647122fcfe0076db4b2259816632938.stex"
+path="res://.import/skeleton_archer.png-94fe01390bc5d9cd09cb267fe69e80da.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/book_altar.png"
-dest_files=[ "res://.import/book_altar.png-3647122fcfe0076db4b2259816632938.stex" ]
+source_file="res://assets/art/skeleton_archer.png"
+dest_files=[ "res://.import/skeleton_archer.png-94fe01390bc5d9cd09cb267fe69e80da.stex" ]
 
 [params]
 

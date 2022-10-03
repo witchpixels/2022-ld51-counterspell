@@ -4,6 +4,7 @@ export var game_settings: Resource;
 var player_state: PlayerState;
 
 onready var timer = $"./Timer";
+onready var book_collect_sfx: AudioStreamPlayer2D = $"./BookCollectSfx";
 
 signal game_start()
 signal exit_reached()
@@ -21,6 +22,7 @@ func get_timer() -> Timer:
 	return timer;
 
 func player_obtained_book():
+	book_collect_sfx.play();
 	emit_signal("game_start")
 	timer.start()
 

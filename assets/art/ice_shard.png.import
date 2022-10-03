@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/book_altar.png-3647122fcfe0076db4b2259816632938.stex"
+path="res://.import/ice_shard.png-c892c4f59f01ff517c2b5f75c76f90f4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/book_altar.png"
-dest_files=[ "res://.import/book_altar.png-3647122fcfe0076db4b2259816632938.stex" ]
+source_file="res://assets/art/ice_shard.png"
+dest_files=[ "res://.import/ice_shard.png-c892c4f59f01ff517c2b5f75c76f90f4.stex" ]
 
 [params]
 
