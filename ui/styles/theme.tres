@@ -1,9 +1,13 @@
-[gd_resource type="Theme" load_steps=2 format=2]
+[gd_resource type="Theme" load_steps=4 format=2]
 
 [ext_resource path="res://ui/styles/press_start_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/art/ui_toggle_button_off.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/ui_toggle_button_on.png" type="Texture" id=3]
 
 [resource]
 default_font = ExtResource( 1 )
+CheckButton/icons/off = ExtResource( 2 )
+CheckButton/icons/on = ExtResource( 3 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 1 )
 Label/constants/shadow_offset_x = 2
 Label/constants/shadow_offset_y = 2

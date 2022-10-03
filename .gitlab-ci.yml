@@ -49,6 +49,32 @@ macosx:
     paths:
       - build/macosx
 
+web:
+  stage: export
+  script:
+    - mkdir -v -p build/web
+    #- cd $EXPORT_NAME
+    - godot -v --export "HTML5" ./build/web/index.html
+  artifacts:
+    name: $EXPORT_NAME-$CI_JOB_NAME
+    paths:
+      - build/web
+pages:
+  only:
+    - main
+  stage: deploy
+  dependencies:
+    - web
+  script:
+    # This ensures the `pages` branch is available.
+    #- git fetch
+    #- git checkout pages
+    - rm -f *.md
+    - mv build/web/** ./public
+  artifacts:
+    paths:
+      - public
+
 itchio:linux:
   only:
     - main
