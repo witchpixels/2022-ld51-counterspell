@@ -11,7 +11,7 @@ func stage_ready():
 	game_stage = (owner as GameStage)
 
 func _process(_delta):
-	var bodies = get_overlapping_bodies();
+	var bodies = get_overlapping_bodies()
 	for body in bodies:
 		print(body)
 		if body.name == "Player":

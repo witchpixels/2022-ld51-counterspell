@@ -1,4 +1,6 @@
-# Spelltimer
+![](title_image.png)
+
+# Counterspell
 A game for _Ludum Dare 51: Every 10 Seconds_
 
 Control the Sorceress through a series of rooms casting spells to defeat monters. You get to choose the spell, but not when it is cast.
@@ -14,6 +16,7 @@ Control the Sorceress through a series of rooms casting spells to defeat monters
   * VsCodium with the GDScript Debugger
   * Pixelorama
   * [SFXr](https://sfxr.me/)
+  * [Beepbox](https://www.beepbox.co)
 
 # Thank Yous
   * Barichello for his [godot-ci example](https://github.com/abarichello/godot-ci)

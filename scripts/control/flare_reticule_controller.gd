@@ -1,10 +1,10 @@
 extends Area2D
 
-export var highlight_color: Color;
-export var unhighlighted_color: Color;
-export var flare_damage: int = 3;
+export var highlight_color: Color
+export var unhighlighted_color: Color
+export var flare_damage: int = 3
 export var flare_reticule_movement_speed: float = 100.0
-export var flare_max_distance: float = 256.0;
+export var flare_max_distance: float = 256.0
 
 onready var sprite: AnimatedSprite = $"./Sprite"
 onready var sfx: AudioStreamPlayer2D = $"./Sfx"
@@ -35,8 +35,8 @@ func _process(delta):
 			
 		translate(movement_vector * flare_reticule_movement_speed * delta)
 	else:
-		position = get_global_mouse_position();
-		clamp_position(delta);
+		position = get_global_mouse_position()
+		clamp_position(delta)
 
 func stage_ready():
 	set_process(true)
@@ -55,12 +55,12 @@ func invoke_spell():
 	sprite.frame = 0
 	
 	if !active:
-		return;
+		return
 
 	flame_ring.visible = true
 	sfx.play()
 
-	var targets = get_overlapping_bodies();
+	var targets = get_overlapping_bodies()
 	for target in targets:
 		if target.has_method("do_damage"):
 			target.do_damage(flare_damage, "flare")

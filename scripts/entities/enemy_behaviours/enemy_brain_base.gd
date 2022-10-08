@@ -10,8 +10,8 @@ enum Awareness {
 onready var attack_animation: AnimatedSprite = $"./AttackAnimation"
 onready var attack_sound: AudioStreamPlayer2D = $"./AttackSound"
 
-export var corpse: PackedScene;
-export var attack_damage: int = 1;
+export var corpse: PackedScene
+export var attack_damage: int = 1
 
 var stage: GameStage
 var owner_body: KinematicBody2D
@@ -23,8 +23,8 @@ func _ready():
     attack_animation.frame = attack_animation.frames.get_frame_count("default")
 
 func on_stage_ready(game_stage: GameStage, owner: KinematicBody2D):
-    stage = game_stage;
-    owner_body = owner;
+    stage = game_stage
+    owner_body = owner
 
 func process_unaware_state():
     current_awareness = Awareness.UNAWARE
@@ -41,7 +41,7 @@ func process_alert_state():
     desired_position = last_known_player_position
 
 func get_desired_poisition() -> Vector2:
-    return desired_position;
+    return desired_position
 
 func try_attack():
     if current_awareness != Awareness.AWARE:
@@ -56,8 +56,8 @@ func try_attack():
         stage.get_player_state().damage_player(attack_damage)
 
 func take_damage(_amount: int, _source: String) -> bool:
-    var corpse_instance = corpse.instance() as Node2D;
+    var corpse_instance = corpse.instance() as Node2D
     corpse_instance.position = owner_body.position
     owner_body.get_parent().add_child(corpse_instance)
 
-    return true;
+    return true

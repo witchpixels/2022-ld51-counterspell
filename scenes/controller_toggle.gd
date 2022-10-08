@@ -1,6 +1,6 @@
 extends CheckButton
 
-var game_stage: GameStage;
+var game_stage: GameStage
 
 func _ready():
 	set_process(false)

@@ -1,14 +1,14 @@
 extends Area2D
 
-export var highlight_color: Color;
-export var unhighlighted_color: Color;
-export var gale_shove_distance: float = 132;
-export var gale_shove_speed: float = 100;
-export var stun_duration: float = 2;
+export var highlight_color: Color
+export var unhighlighted_color: Color
+export var gale_shove_distance: float = 132
+export var gale_shove_speed: float = 100
+export var stun_duration: float = 2
 export var gale_reticule_movement_speed: float = 100.0
-export var gale_max_distance: float = 256.0;
+export var gale_max_distance: float = 256.0
 
-onready var sprite: AnimatedSprite = $"./Sprite";
+onready var sprite: AnimatedSprite = $"./Sprite"
 onready var particles: Particles2D = $"./Particles"
 onready var sfx: AudioStreamPlayer2D = $"./Sfx"
 
@@ -37,8 +37,8 @@ func _process(delta):
 			
 		translate(movement_vector * gale_reticule_movement_speed * delta)
 	else:
-		position = get_global_mouse_position();
-		clamp_position(delta);
+		position = get_global_mouse_position()
+		clamp_position(delta)
 
 func stage_ready():
 	set_process(true)
@@ -61,7 +61,7 @@ func invoke_spell():
 
 	sfx.play()
 	particles.restart()
-	var targets = get_overlapping_bodies();
+	var targets = get_overlapping_bodies()
 
 	for target in targets:
 		if target.has_method("stun"):

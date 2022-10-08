@@ -15,7 +15,7 @@ var game_settings: GameSettings
 
 
 func _ready():
-	camera_zoom_target = camera_living_zoom_target;
+	camera_zoom_target = camera_living_zoom_target
 	set_process(false)
 	var _i = owner.connect("ready", self, "stage_ready")
 
@@ -35,7 +35,8 @@ func _process(delta):
 
 
 	if (ideal_positon - position).length() > wander_radius:
-		position = lerp(position, ideal_positon, delta * camera_speed)
+		position = lerp(position, ideal_positon, delta * camera_speed).round()
+
 	var current_zoom = zoom.x
 	if current_zoom - camera_zoom_target > 0.0001:
 		current_zoom = lerp(current_zoom, camera_zoom_target, camera_zoom_speed * delta)

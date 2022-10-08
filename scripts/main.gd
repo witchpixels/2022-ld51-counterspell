@@ -1,11 +1,11 @@
 extends Node2D
 
-export var game_stage_scene: PackedScene;
+export var game_stage_scene: PackedScene
 
 onready var game_over: Control = $"./GameOver"
 onready var boot_splash: Control = $"./BootFlow"
 
-var current_game;
+var current_game
 
 func _load_new_game():
 	if current_game != null:
@@ -22,7 +22,7 @@ func _new_game_ready():
 func _on_player_killed():
 	remove_child(current_game)
 	var timer = get_tree().create_timer(5)
-	timer.connect("timeout", self, "_on_BootFlow_finished");
+	timer.connect("timeout", self, "_on_BootFlow_finished")
 
 func _on_BootFlow_finished():
 	_load_new_game()

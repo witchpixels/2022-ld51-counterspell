@@ -10,8 +10,8 @@ func _ready():
 	var _i = owner.connect("ready", self, "stage_ready")
 
 func _process(_delta):
-	life_bar.visible_characters = player_state.health;
-	max_life_bar.visible_characters = player_state.max_health;
+	life_bar.visible_characters = player_state.health
+	max_life_bar.visible_characters = player_state.max_health
 
 func stage_ready():
 	set_process(true)
