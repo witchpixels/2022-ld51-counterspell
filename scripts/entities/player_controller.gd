@@ -22,6 +22,7 @@ var spells: Array = [
 func _ready():
 	set_process(false)
 	var _i = owner.connect("ready", self, "stage_ready")
+	_i = death_sound.connect("finished", self, "_on_death_sound_played")
 
 func _physics_process(delta):
 	var movement_vector: Vector2 = (Vector2(
@@ -65,7 +66,11 @@ func _on_hurt():
 
 func _on_killed():
 	death_sound.play()
+	get_tree().paused = true
 
 func _on_timer_timeout():
 	current_spell_index = (current_spell_index + 1) % spells.size()
 	player_state.call_deferred("set_spell", spells[current_spell_index])
+
+func _on_death_sound_played():
+	game_stage.reset_game_world()

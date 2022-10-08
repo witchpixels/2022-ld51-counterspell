@@ -17,7 +17,7 @@ func _load_new_game():
 	add_child(current_game)
 
 func _new_game_ready():
-	current_game.get_player_state().connect("player_killed", self, "_on_player_killed")
+	current_game.connect("reset_needed", self, "_on_player_killed")
 
 func _on_player_killed():
 	remove_child(current_game)

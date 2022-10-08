@@ -65,7 +65,7 @@ func invoke_spell():
 
 	for target in targets:
 		if target.has_method("stun"):
-			target.stun(stun_duration)
+			target.stun()
 
 func spell_changed(spell_name: String):
 	active = (spell_name == "gale")
