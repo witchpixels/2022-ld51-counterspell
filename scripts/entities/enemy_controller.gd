@@ -18,38 +18,35 @@ onready var player_search_raycast: RayCast2D = $"./PlayerSearchRayCast"
 onready var enemy_brain: EnemyBrainBase = $"./Brain"
 var awareness_visuals: Dictionary = {};
 
-var stun_timer: float;
+var was_stunned_this_cycle: bool = false
 
 var game_stage: GameStage
 var player_state: PlayerState
 
 func _ready():
 	set_process(false)
-	var _i = owner.connect("ready", self, "stage_ready")
 
 	awareness_visuals[EnemyBrainBase.Awareness.ALERT] = $"./AwarenessContainter/Alert"
 	awareness_visuals[EnemyBrainBase.Awareness.AWARE] = $"./AwarenessContainter/Aware"
 	awareness_visuals[EnemyBrainBase.Awareness.UNAWARE] = $"./AwarenessContainter/Unaware"
+	
+	var _i = owner.connect("ready", self, "stage_ready")
 
 func stage_ready():
-	set_process(true)
 	game_stage = (owner as GameStage)
 	player_state = game_stage.get_player_state()
 	enemy_brain.on_stage_ready(game_stage, self)
+	game_stage.get_timer().connect("timeout", self, "_on_timer_timeout")
+
+	set_process(true)
 
 func _physics_process(delta):
 	if state == ActivityState.DEAD:
 		get_parent().remove_child(self)
 		return
 
-
 	if state == ActivityState.STUNNED:
-		stun_timer -= delta
-
-		if stun_timer <= 0:
-			state = ActivityState.ACTIVE
-		return;
-
+		return
 
 	player_search_raycast.cast_to = player_state.world_position - position
 	player_search_raycast.force_raycast_update()
@@ -87,13 +84,17 @@ func do_damage(damage_amount: int, damage_source: String):
 	if enemy_brain.take_damage(damage_amount, damage_source):
 		state = ActivityState.DEAD;
 
+func _on_timer_timeout():
+	if state == ActivityState.STUNNED:
+		if was_stunned_this_cycle:
+			was_stunned_this_cycle = false
+		else:
+			state = ActivityState.ACTIVE
 
-func stun(stun_duration: float):
-
-	print("%s was stunned" % name)
-	stun_timer = stun_duration
+func stun():
 	state = ActivityState.STUNNED
 	awareness = EnemyBrainBase.Awareness.UNAWARE
+	was_stunned_this_cycle = true
 	update_awareness_value()
 
 func process_unaware_state():

@@ -513,177 +513,345 @@ texture = ExtResource( 6 )
 [node name="SkeletonWarrior" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 672, -1280 )
 collision_mask = 3
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior2" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 288, -1280 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior3" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 288, -1152 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior4" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 672, -1152 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior5" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 288, -1024 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior6" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 672, -1024 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior7" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 288, -896 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior8" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 680, -896 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior9" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 488, -792 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior10" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 128, -1792 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior11" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 128, -1664 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior12" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 200, -1728 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior13" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 768, -1792 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior14" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 896, -1792 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior15" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 768, -1664 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior16" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 896, -1664 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior17" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 488, -1760 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior18" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 488, -1984 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior19" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1192, -2104 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior20" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1240, -2104 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior21" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1280, -2104 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior22" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1192, -2008 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior23" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1240, -2008 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonWarrior24" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1288, -2008 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 848, -1744 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher2" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 128, -1744 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher4" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 488, -2056 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher3" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1376, -2056 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="Skeleton" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1824, -1336 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="Skeleton2" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1288, -1336 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="Skeleton3" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1288, -1080 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="Skeleton4" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1824, -1080 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="Skeleton5" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1824, -824 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="Skeleton6" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1288, -824 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="Skeleton7" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1512, -488 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="Skeleton8" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1608, -488 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="Skeleton9" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1624, -592 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="Skeleton10" parent="world" instance=ExtResource( 4 )]
 position = Vector2( 1496, -592 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher5" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1560, -536 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher6" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1360, -776 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher21" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1428, -736 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher7" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1752, -776 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher20" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1664, -736 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher8" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1752, -880 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher9" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1360, -880 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher10" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1360, -1024 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher18" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1408, -1024 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher11" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1360, -1136 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher12" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1752, -1136 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher14" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1752, -1280 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher15" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1752, -1384 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher16" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1360, -1384 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher17" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1360, -1280 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher13" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1752, -1024 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="SkeletonArcher19" parent="world" instance=ExtResource( 14 )]
 position = Vector2( 1696, -1024 )
+awareness = 2
+state = 0
+can_see_player = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
+pause_mode = 2
 unique_name_in_owner = true
-anchor_mode = 0
+position = Vector2( 512, 400 )
 current = true
 process_mode = 0
 script = ExtResource( 11 )
-camera_speed = 0.5
-wander_radius = 60.0
+camera_speed = 1.5
+wander_radius = 32.0
+camera_zoom_speed = 50.0
+camera_death_zoom_target = 0.5
 
 [node name="UIRoot" type="Control" parent="Camera2D"]
 pause_mode = 2

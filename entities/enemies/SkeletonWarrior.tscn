@@ -36,6 +36,9 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource( 4 )
 enemy_speed = 50.0
+awareness = null
+state = null
+can_see_player = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
@@ -110,4 +113,5 @@ frame = 3
 playing = true
 
 [node name="AttackSound" type="AudioStreamPlayer2D" parent="Brain"]
+pause_mode = 2
 stream = ExtResource( 7 )

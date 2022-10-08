@@ -9,9 +9,11 @@ onready var music: AudioStreamPlayer = $"./Music"
 
 signal game_start()
 signal exit_reached()
+signal reset_needed()
 
 func _ready():
 	player_state = PlayerState.new();
+	get_tree().paused = false
 
 func get_game_settings() -> GameSettings:
 	return game_settings as GameSettings;
@@ -31,3 +33,6 @@ func player_obtained_book():
 
 func player_entered_exit():
 	emit_signal("exit_reached")
+
+func reset_game_world():
+	emit_signal("reset_needed")
