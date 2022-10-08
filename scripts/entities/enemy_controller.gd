@@ -8,8 +8,8 @@ enum ActivityState {
 
 export var enemy_speed: float = 75.0
 export var distance_to_player_tick_condition: float = 1024
-export var unaware_tick_rate_seconds = 1
-export var alert_tick_rate_seconds = 0.5
+export var unaware_tick_rate_seconds: float = 1
+export var alert_tick_rate_seconds: float = 0.5
 
 export var awareness = EnemyBrainBase.Awareness.UNAWARE
 export var state = ActivityState.ACTIVE

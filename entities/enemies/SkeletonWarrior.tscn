@@ -32,13 +32,12 @@ animations = [ {
 } ]
 
 [node name="Skeleton" type="KinematicBody2D"]
-collision_layer = 2
+collision_layer = 3
 collision_mask = 2
 script = ExtResource( 4 )
 enemy_speed = 50.0
-awareness = null
-state = null
-can_see_player = null
+unaware_tick_rate_seconds = 0.5
+alert_tick_rate_seconds = 0.25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
