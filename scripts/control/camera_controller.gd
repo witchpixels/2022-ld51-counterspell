@@ -19,7 +19,7 @@ func _ready():
 	set_process(false)
 	var _i = owner.connect("ready", self, "stage_ready")
 
-func _process(delta):
+func _physics_process(delta):
 	var aiming_vector = Vector2.ZERO
 	var look_distance = max_look_distance
 
