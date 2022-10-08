@@ -7,10 +7,12 @@ enum ActivityState {
 }
 
 export var enemy_speed: float = 75.0
+export var distance_to_player_tick_condition: float = 1024
+export var unaware_tick_rate_seconds = 1
+export var alert_tick_rate_seconds = 0.5
 
 export var awareness = EnemyBrainBase.Awareness.UNAWARE
 export var state = ActivityState.ACTIVE
-
 export var can_see_player: bool = false
 
 onready var sprite: Sprite = $"./Sprite" 
@@ -19,6 +21,8 @@ onready var enemy_brain: EnemyBrainBase = $"./Brain"
 var awareness_visuals: Dictionary = {}
 
 var was_stunned_this_cycle: bool = false
+var tick_cooldown = 0
+var distance_to_player_tick_condition_squared = 0
 
 var game_stage: GameStage
 var player_state: PlayerState
@@ -26,6 +30,8 @@ var player_state: PlayerState
 func _ready():
 	set_process(false)
 
+	distance_to_player_tick_condition_squared = distance_to_player_tick_condition * distance_to_player_tick_condition
+	tick_cooldown = unaware_tick_rate_seconds
 	awareness_visuals[EnemyBrainBase.Awareness.ALERT] = $"./AwarenessContainter/Alert"
 	awareness_visuals[EnemyBrainBase.Awareness.AWARE] = $"./AwarenessContainter/Aware"
 	awareness_visuals[EnemyBrainBase.Awareness.UNAWARE] = $"./AwarenessContainter/Unaware"
@@ -48,6 +54,25 @@ func _physics_process(delta):
 	if state == ActivityState.STUNNED:
 		return
 
+	if player_state.world_position.distance_squared_to(position) > distance_to_player_tick_condition_squared:
+		return
+
+	var desired_movement = enemy_brain.get_desired_poisition() - position
+	if (desired_movement.length() > 16.0): #wpx2022 TODO: this should come from const but is basically equal to entity size
+		var movement_vector = desired_movement.normalized()
+
+		if movement_vector.x < 0:
+			sprite.flip_h = true
+		elif movement_vector.x > 0:
+			sprite.flip_h = false
+
+		translate(move_and_slide(movement_vector * enemy_speed * delta))
+
+	if tick_cooldown >= 0:
+		tick_cooldown -= delta
+		return
+
+
 	player_search_raycast.cast_to = player_state.world_position - position
 	player_search_raycast.force_raycast_update()
 	if player_search_raycast.is_colliding():
@@ -61,21 +86,13 @@ func _physics_process(delta):
 
 	if (awareness == EnemyBrainBase.Awareness.UNAWARE):
 		process_unaware_state()
+		tick_cooldown = unaware_tick_rate_seconds
 	elif (awareness == EnemyBrainBase.Awareness.AWARE):
 		process_aware_state()
+		tick_cooldown = 0
 	elif (awareness == EnemyBrainBase.Awareness.ALERT):
 		process_alert_state()
-	
-	var desired_movement = enemy_brain.get_desired_poisition() - position
-	if (desired_movement.length() > 16.0): #wpx2022 TODO: this should come from const but is basically equal to entity size
-		var movement_vector = desired_movement.normalized()
-
-		if movement_vector.x < 0:
-			sprite.flip_h = true
-		elif movement_vector.x > 0:
-			sprite.flip_h = false
-
-		translate(move_and_slide(movement_vector * enemy_speed * delta))
+		tick_cooldown = alert_tick_rate_seconds
 
 	enemy_brain.try_attack()
 	update_awareness_value()
@@ -94,6 +111,7 @@ func _on_timer_timeout():
 func stun():
 	state = ActivityState.STUNNED
 	awareness = EnemyBrainBase.Awareness.UNAWARE
+	tick_cooldown = unaware_tick_rate_seconds
 	was_stunned_this_cycle = true
 	update_awareness_value()
 
@@ -102,18 +120,21 @@ func process_unaware_state():
 
 	if can_see_player:
 		awareness = EnemyBrainBase.Awareness.AWARE
+		tick_cooldown = 0
 
 func process_aware_state():
 	enemy_brain.process_aware_state()
 
 	if !can_see_player:
 		awareness = EnemyBrainBase.Awareness.ALERT
+		tick_cooldown = alert_tick_rate_seconds
 
 func process_alert_state():
 	enemy_brain.process_alert_state()
 
 	if can_see_player:
 		awareness = EnemyBrainBase.Awareness.AWARE
+		tick_cooldown = 0
 
 func update_awareness_value():
 	for awareness_visual in awareness_visuals.values():
