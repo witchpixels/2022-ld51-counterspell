@@ -1,10 +1,10 @@
 extends Area2D
 
-export var highlight_color: Color;
-export var unhighlighted_color: Color;
+export var highlight_color: Color
+export var unhighlighted_color: Color
 export var spike_damage: float = 1
 
-onready var sprite: AnimatedSprite = $"./Sprite";
+onready var sprite: AnimatedSprite = $"./Sprite"
 onready var particles: Particles2D = $"./Particles"
 onready var sfx: AudioStreamPlayer2D = $"./Sfx"
 
@@ -32,11 +32,11 @@ func _process(_delta):
 			Input.get_axis("player_aim_up", "player_aim_down")).normalized()
 
 		if (movement_vector.length_squared() != 1):
-			return;
+			return
 		angle = rad2deg(movement_vector.angle())
 	else:
 		angle = rad2deg(global_position.direction_to(get_global_mouse_position()).angle())
-	rotation_degrees = angle; 
+	rotation_degrees = angle 
 
 func stage_ready(stage: GameStage):
 	set_process(true)
@@ -57,7 +57,7 @@ func invoke_spell():
 	if !active:
 		return
 
-	var targets = get_overlapping_bodies();
+	var targets = get_overlapping_bodies()
 	
 	sfx.play()
 	particles.restart()

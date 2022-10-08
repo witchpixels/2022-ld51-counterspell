@@ -18,7 +18,7 @@ func _process(_delta):
 	if obtained:
 		return
 
-	var bodies = get_overlapping_bodies();
+	var bodies = get_overlapping_bodies()
 	for body in bodies:
 		print(body)
 		if body.name == "Player":

@@ -6,7 +6,7 @@ enum ActivityState {
 	STUNNED = 2
 }
 
-export var enemy_speed: float = 75.0;
+export var enemy_speed: float = 75.0
 
 export var awareness = EnemyBrainBase.Awareness.UNAWARE
 export var state = ActivityState.ACTIVE
@@ -16,7 +16,7 @@ export var can_see_player: bool = false
 onready var sprite: Sprite = $"./Sprite" 
 onready var player_search_raycast: RayCast2D = $"./PlayerSearchRayCast"
 onready var enemy_brain: EnemyBrainBase = $"./Brain"
-var awareness_visuals: Dictionary = {};
+var awareness_visuals: Dictionary = {}
 
 var was_stunned_this_cycle: bool = false
 
@@ -78,11 +78,11 @@ func _physics_process(delta):
 		translate(move_and_slide(movement_vector * enemy_speed * delta))
 
 	enemy_brain.try_attack()
-	update_awareness_value();
+	update_awareness_value()
 
 func do_damage(damage_amount: int, damage_source: String):
 	if enemy_brain.take_damage(damage_amount, damage_source):
-		state = ActivityState.DEAD;
+		state = ActivityState.DEAD
 
 func _on_timer_timeout():
 	if state == ActivityState.STUNNED:

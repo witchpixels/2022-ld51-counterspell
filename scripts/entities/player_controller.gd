@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 signal game_stage_ready(game_stage)
 
-export var movement_speed: float = 30;
+export var movement_speed: float = 30
 onready var timer 
 onready var sprite: Sprite = $"./Sprite"
 onready var hurt_sound: AudioStreamPlayer2D = $"./HurtSound"
@@ -12,7 +12,7 @@ var game_stage: GameStage
 var game_settings: GameSettings
 var player_state: PlayerState
 
-var current_spell_index = 0;
+var current_spell_index = 0
 var spells: Array = [
 	"spike",
 	"gale",
@@ -36,7 +36,7 @@ func _physics_process(delta):
 
 	var velocity = move_and_slide(movement_vector * movement_speed * delta)
 	translate(velocity)
-	player_state.world_position = position;
+	player_state.world_position = position
 
 func _process(_delta):
 	if player_state.in_iframes:
@@ -46,14 +46,14 @@ func _process(_delta):
 	
 func stage_ready():
 	set_process(true)
-	game_stage = owner;
+	game_stage = owner
 	game_settings = game_stage.get_game_settings()
 	player_state = game_stage.get_player_state()
 	player_state.world_position = position
 	player_state.player_body = self
 
-	var _i = player_state.connect("player_hurt", self, "_on_hurt");
-	_i = player_state.connect("player_killed", self, "_on_killed");
+	var _i = player_state.connect("player_hurt", self, "_on_hurt")
+	_i = player_state.connect("player_killed", self, "_on_killed")
 	_i = game_stage.get_timer().connect("timeout", self, "_on_timer_timeout")
 
 	emit_signal("game_stage_ready", game_stage)
